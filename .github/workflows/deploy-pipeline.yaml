@@ -4,7 +4,8 @@ on: [push]
 jobs:
 
   lint:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: development
     steps: 
       - name: Check out code
         uses: actions/checkout@v2
@@ -21,7 +22,8 @@ jobs:
             flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
   build:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: development
     needs: lint
     steps:
       - name: Check out code
@@ -46,7 +48,8 @@ jobs:
           path: ${{ github.sha }}.zip
 
   publish:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: development
     needs: build
     steps:
       - name: create release
